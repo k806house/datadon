@@ -45,6 +45,7 @@
 }
 
 .caption {
+  color: white;
   animation: show-caption 3s forwards;
 }
 
