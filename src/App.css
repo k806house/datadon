@@ -41,12 +41,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 400px;
+  padding-top: 350px;
 }
 
 .caption {
   color: white;
   animation: show-caption 3s forwards;
+  font-size: 70px;
 }
 
 .circle-enter-active {

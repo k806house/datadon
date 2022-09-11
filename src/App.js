@@ -16,7 +16,7 @@ function App() {
             classNames="circle"
           > */}
           <h1 className="caption">
-            Your data is important
+            Your data is important.
           </h1>
         {/* </CSSTransition> */}
       </div> 
