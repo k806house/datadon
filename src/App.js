@@ -7,15 +7,17 @@ function App() {
 
   return (
     <div className="App">
-      <CSSTransition
-          in={captionVisible}
-          timeout={500}
-          mountOnEnter
-          unmountOnExit
-          classNames="circle"
-        >
-          <div className="circle"></div>
-      </CSSTransition>
+      <div className='wrap'>
+        <CSSTransition
+            in={captionVisible}
+            timeout={500}
+            mountOnEnter
+            unmountOnExit
+            classNames="circle"
+          >
+            <div className="circle"></div>
+        </CSSTransition>
+      </div> 
     </div>
   );
 }
