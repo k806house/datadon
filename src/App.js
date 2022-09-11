@@ -1,23 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 
+import {CSSTransition} from 'react-transition-group';
 function App() {
+  const captionVisible = true
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <CSSTransition
+          in={captionVisible}
+          timeout={500}
+          mountOnEnter
+          unmountOnExit
+          classNames="circle"
         >
-          Learn React
-        </a>
-      </header>
+          <div className="circle"></div>
+      </CSSTransition>
     </div>
   );
 }
