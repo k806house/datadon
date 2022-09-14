@@ -8,11 +8,22 @@ import Button from "@mui/material/Button";
 export class Header extends Component {
     render() {
         return(
-            <AppBar position="static">
+            <AppBar 
+                position="static"
+                color="primary"
+            >
                 <Toolbar>
-                    <Typography variant="h6" 
-                        component="div" sx={{ flexGrow: 1,
-                            fontFamily: "Montserrat", }}>
+                    <Typography 
+                        variant="h6" 
+                        component="div" 
+                        href="/"
+                        component="a"
+                        sx={{ 
+                            flexGrow: 1,
+                            fontFamily: "Montserrat", 
+                            textDecoration: 'none',
+                            color: 'inherit',
+                        }}>
                         Your data is important
                     </Typography>
                     <Button

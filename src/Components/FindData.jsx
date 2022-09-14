@@ -13,20 +13,22 @@ export class FindData extends Component {
         return(
             <>
                 <Header/>
-                <h2>My explore</h2>
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {["Blood", "Result1", "Result2"].map((value) => (
-                        <ListItem
-                            key={value}
-                            disableGutters
-                        >
-                            <ListItemText primary={`${value}`} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Button
-                    href="/find-data/create-study"
-                > Create study </Button>
+                <div className="container">
+                    <h2>My explore</h2>
+                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                        {["Blood", "Result1", "Result2"].map((value) => (
+                            <ListItem
+                                key={value}
+                                disableGutters
+                            >
+                                <ListItemText primary={`${value}`} />
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Button
+                        href="/find-data/create-study"
+                    > Create study </Button>
+                </div>
             </>
         )
     }
