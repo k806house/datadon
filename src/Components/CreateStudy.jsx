@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import "./CreateStudy.css";
 
-export class ShareData extends Component {
+export class CreateStudy extends Component {
     render() {
         return(
             <div>
-                ShareData
+                CreateStudy
             </div>
         )
     }

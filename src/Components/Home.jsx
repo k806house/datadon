@@ -31,6 +31,7 @@ export class Home extends Component {
                     Share data
                     </Button>
                     <Button
+                        href="/find-data"
                         sx={{
                             color: '#ffffff91',
                             fontSize: 20,

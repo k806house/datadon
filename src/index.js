@@ -10,8 +10,10 @@ import {
   Route
 } from "react-router-dom";
 
-import {ShareData} from "./Components/ShareData";
-import {Home} from "./Components/Home";
+import { ShareData } from "./Components/ShareData";
+import { FindData } from './Components/FindData';
+import { Home } from "./Components/Home";
+import { CreateStudy } from './Components/CreateStudy';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +22,8 @@ root.render(
       <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/share-data" element={<ShareData />}></Route>
+          <Route path="/find-data" element={<FindData />}></Route>
+          <Route path="/find-data/create-study" element={<CreateStudy />}></Route>
       </Routes>
       <App />
     </BrowserRouter>
