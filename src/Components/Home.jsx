@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from '@mui/material';
 
 import "./Home.css";
-import { ShareData } from "./ShareData"
+import { ShareData } from "./ShareData/ShareData"
 
 import {
     BrowserRouter,

@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -7,7 +6,7 @@ body {
   background-repeat: no-repeat;
   background-position: right;
   height: 100%;
-  margin: 0;
+  margin: 55px 65px;
 }
 
 code {
@@ -17,5 +16,4 @@ code {
 
 html {
   height: 100%;
-  margin: 0;
 }

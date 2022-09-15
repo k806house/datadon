@@ -10,7 +10,7 @@ import {
   Route
 } from "react-router-dom";
 
-import { ShareData } from "./Components/ShareData";
+import { ShareData } from "./Components/ShareData/ShareData";
 import { FindData } from './Components/FindData';
 import { Home } from "./Components/Home";
 import { CreateStudy } from './Components/CreateStudy';
