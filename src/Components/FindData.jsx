@@ -5,8 +5,10 @@ import "./FindData.css"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
 import { Button } from "@mui/material";
 import { Header } from "./Header";
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 export class FindData extends Component {
     render() {
@@ -20,10 +22,17 @@ export class FindData extends Component {
                             <ListItem
                                 key={value}
                                 disableGutters
+                                secondaryAction={
+                                    <IconButton edge="end" aria-label="delete">
+                                      <SaveAltIcon />
+                                    </IconButton>
+                                  }
                             >
-                                <ListItemText primary={`${value}`} />
+                                
+                                <ListItemText primary={`${value}`}/>
+                                <ListItemText primary={`50/100`} />
                             </ListItem>
-                        ))}
+                        ))} 
                     </List>
                     <Button
                         href="/find-data/create-study"
