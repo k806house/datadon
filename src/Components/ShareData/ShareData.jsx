@@ -12,11 +12,13 @@ import BloodtypeIcon from '@mui/icons-material/Bloodtype';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import AddIcon from '@mui/icons-material/Add';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
+import { Header } from "./Header";
 
 export class ShareData extends Component {
     render() {
         return (
           <div>
+            <Header />
             <h1>My data</h1>
             <Stack
               direction="column"

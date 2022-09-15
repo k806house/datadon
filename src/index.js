@@ -19,15 +19,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/share-data" element={<ShareData />}></Route>
-          <Route path="/find-data" element={<FindData />}></Route>
-          <Route path="/find-data/create-study" element={<CreateStudy />}></Route>
-      </Routes>
-      <App />
-    </BrowserRouter>
-  
+        <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/share-data" element={<ShareData />}></Route>
+            <Route path="/find-data" element={<FindData />}></Route>
+            <Route path="/find-data/create-study" element={<CreateStudy />}></Route>
+        </Routes>
+      </BrowserRouter> 
   </React.StrictMode>
 );
 
