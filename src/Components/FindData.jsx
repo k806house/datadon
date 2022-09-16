@@ -9,13 +9,19 @@ import IconButton from '@mui/material/IconButton';
 import { Button } from "@mui/material";
 import { Header } from "./Header";
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 export class FindData extends Component {
     render() {
         return(
             <>
-                {/* <Header/> */}
-                <div className="container">
+                <Container maxWidth="m">
+                    <Box sx={{ bgcolor: 'white', height: '100vh' }}>
+                        My explore
+                    </Box>
+                </Container>
+                {/* <div className="container">
                     My explore
                     <List sx={{ 
                         width: '100%',
@@ -48,7 +54,7 @@ export class FindData extends Component {
                     > 
                         Create study 
                     </Button>
-                </div>
+                </div> */}
             </>
         )
     }
