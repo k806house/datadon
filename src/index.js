@@ -18,7 +18,7 @@ import { CreateStudy } from './Components/CreateStudy';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+      <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/share-data" element={<ShareData />}></Route>
