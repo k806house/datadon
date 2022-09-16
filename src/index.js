@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 import { ShareData } from "./Components/ShareData/ShareData";
-import { FindData } from './Components/FindData';
+import { FindData } from './Components/FindData/FindData';
 import { Home } from "./Components/Home";
 import { CreateStudy } from './Components/CreateStudy';
 

@@ -12,7 +12,7 @@ import {
 
 import { Home } from './Components/Home'
 import { ShareData } from "./Components/ShareData/ShareData";
-import { FindData } from './Components/FindData';
+import { FindData } from './Components/FindData/FindData';
 import { CreateStudy } from './Components/CreateStudy';
 
 function App() {
