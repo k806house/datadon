@@ -25,7 +25,7 @@ export function ShareData() {
         spacing={1}
       >
         <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={9}>
+          <Grid item xs={10}>
             <Paper
               component="form"
               sx={{
@@ -40,40 +40,45 @@ export function ShareData() {
               <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search data..." />
             </Paper>
           </Grid>
-          <Grid item xs={3}>
+          <Grid
+            item
+            xs={2}
+            sx={{
+              display: "flex",
+            }}
+          >
             <Button
               variant="contained"
               startIcon={<AddIcon />}
               size="large"
-              sx={{ width: 180 }}
+              sx={{ flex: 2 }}
             >
               Add
             </Button>
           </Grid>
+          <Grid item xs={12}>
+            <Paper>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <ListItemAvatar sx={{ p: 3 }}>
+                  <Avatar>
+                    <VaccinesIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary="Vaccination info"
+                  secondary="July 20, 2022"
+                />
+                <IconButton color="primary" size="large" sx={{ margin: 3 }}>
+                  <DeleteIcon />
+                </IconButton>
+              </Stack>
+            </Paper>
+          </Grid>
         </Grid>
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="flex-start"
-          spacing={2}
-        >
-          <Paper sx={{ width: 1290 }}>
-            <Stack direction="row" alignItems="center" justifyContent="center">
-              <ListItemAvatar sx={{ margin: 3 }}>
-                <Avatar>
-                  <VaccinesIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary="Vaccination info"
-                secondary="July 20, 2022"
-              />
-              <IconButton color="primary" size="large" sx={{ margin: 3 }}>
-                <DeleteIcon />
-              </IconButton>
-            </Stack>
-          </Paper>
-        </Stack>
       </Stack>
     </div>
   );
