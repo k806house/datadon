@@ -1,61 +1,82 @@
-import React, { Component } from "react";
+import React from "react";
+import { useState } from 'react';
 
 import "./FindData.css"
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import { Button } from "@mui/material";
-import { Header } from "./Header";
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { Stack } from "@mui/system";
 
-export class FindData extends Component {
-    render() {
-        return(
-            <>
-                <Container maxWidth="m">
-                    <Box sx={{ bgcolor: 'white', height: '100vh' }}>
-                        My explore
-                    </Box>
-                </Container>
-                {/* <div className="container">
-                    My explore
-                    <List sx={{ 
-                        width: '100%',
-                        maxWidth: 360, 
-                        bgcolor: 'background.paper',
-                        maxHeight: 300,
-                        overflow: 'auto',
-                        }}
-                    >
-                        {["Blood", "Result1", "Result2","Blood", "Result1", "Result2",
-                          "Blood", "Result1", "Result2",
-                          "Blood", "Result1", "Result2"].map((value) => (
-                            <ListItem
-                                key={value}
-                                disableGutters
-                                secondaryAction={
-                                    <IconButton edge="end" aria-label="delete">
-                                      <SaveAltIcon />
-                                    </IconButton>
-                                }
-                            >
-                                
-                                <ListItemText primary={`${value}`}/>
-                                <ListItemText primary={`50/100`} />
-                            </ListItem>
-                        ))} 
-                    </List>
-                    <Button
-                        href="/find-data/create-study"
-                    > 
-                        Create study 
-                    </Button>
-                </div> */}
-            </>
-        )
-    }
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+  };
+
+export function FindData() {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    return(
+        <>
+            <Button onClick={handleOpen}>Open modal</Button>
+            <Modal
+                open={open}
+                onClose={handleClose}
+            >
+                <Box sx={style}>
+                    <Stack spacing={4}>
+                        <TextField
+                            required
+                            id="outlined-required"
+                            label="Required"
+                            defaultValue="Name"
+                        />
+                        <TextField
+                            id="outlined-multiline"
+                            label="Required"
+                            multiline
+                            required
+                            rows="3"
+                            defaultValue="Description"
+                        />
+                        <Autocomplete
+                            multiple
+                            required
+                            id="tags-outlined"
+                            options={explores}
+                            getOptionLabel={(option) => option.title}
+                            defaultValue={[explores[0]]}
+                            filterSelectedOptions
+                            renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="filterSelectedOptions"
+                                placeholder="Needed data"
+                            />
+                            )}
+                        />
+                        <Button>
+                            Save
+                        </Button>
+                    </Stack>
+                </Box>
+            </Modal>
+        </>
+    )
 }
+
+const explores = [
+    { title: 'Blood'},
+    { title: 'Vactination'}
+]
