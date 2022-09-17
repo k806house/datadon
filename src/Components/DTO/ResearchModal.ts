@@ -1,6 +1,6 @@
 import Tag from "./Tag"
 
-export default class Research {
+export default class ResearchModal {
 
     title: string;
     description: string;
