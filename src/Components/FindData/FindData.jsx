@@ -17,11 +17,13 @@ import {
   Container,
   Paper,
   InputBase,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
-import "../ReaserchInfo";
+import { ResearchInfo } from  "../ResearchInfo";
+import { NewResearch } from "../NewResearch";
 import ResearchView from "../DTO/ResearchView.ts";
 import FindDataItem from "./FindDataItem";
 
@@ -96,41 +98,11 @@ export function FindData() {
       </Grid>
 
       <Modal open={openNewResearch} onClose={handleCloseNewResearch}>
-        <Box sx={style}>
-          <Stack spacing={4}>
-            <TextField
-              required
-              id="outlined-required"
-              label="Required"
-              defaultValue="Name"
-            />
-            <TextField
-              id="outlined-multiline"
-              label="Required"
-              multiline
-              required
-              rows="3"
-              defaultValue="Description"
-            />
-            <Autocomplete
-              multiple
-              required
-              id="tags-outlined"
-              options={tags}
-              getOptionLabel={(option) => option.title}
-              defaultValue={[tags[0]]}
-              filterSelectedOptions
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="filterSelectedOptions"
-                  placeholder="Needed data"
-                />
-              )}
-            />
-            <Button>Save</Button>
-          </Stack>
-        </Box>
+        <NewResearch />
+      </Modal>
+
+      <Modal open={openResearchInfo} onClose={handleCloseResearchInfo}>
+        <ResearchInfo />
       </Modal>
     </>
   );
