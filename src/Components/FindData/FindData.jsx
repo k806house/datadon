@@ -3,24 +3,27 @@ import { useState } from "react";
 
 import "./FindData.css";
 import Tag from "../DTO/Tag.ts";
-import JsonData from '../../data/tags.json';
+import JsonData from "../../data/tags.json";
 
-import { 
-  Stack, 
-  IconButton, 
-  Grid, 
-  Button, 
-  Autocomplete, 
-  TextField, 
-  Box, 
-  Modal, 
-  Container, 
+import {
+  Stack,
+  IconButton,
+  Grid,
+  Button,
+  Autocomplete,
+  TextField,
+  Box,
+  Modal,
+  Container,
   Paper,
-  InputBase } from "@mui/material";
+  InputBase,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DownloadIcon from "@mui/icons-material/Download";
 import SearchIcon from "@mui/icons-material/Search";
-import PeopleIcon from '@mui/icons-material/People';
+import PeopleIcon from "@mui/icons-material/People";
+
+import "../ReaserchInfo";
 
 const style = {
   position: "absolute",
@@ -34,11 +37,15 @@ const style = {
 };
 
 export function FindData() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const tags: Tag[] = JsonData;
+  const [openNewResearch, setOpenNewResearch] = useState(false);
+  const handleOpenNewResearch = () => setOpenNewResearch(true);
+  const handleCloseNewResearch = () => setOpenNewResearch(false);
 
+  const [openResearchInfo, setOpenResearchInfo] = useState(false);
+  const handleOpenResearchInfo = () => setOpenResearchInfo(true);
+  const handleCloseResearchInfo = () => setOpenResearchInfo(false);
+
+  const tags: Tag[] = JsonData;
 
   return (
     <>
@@ -56,41 +63,56 @@ export function FindData() {
             <IconButton type="button" sx={{ p: "8px" }} aria-label="search">
               <SearchIcon />
             </IconButton>
-            <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search explorations..." />
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search explorations..."
+            />
           </Paper>
         </Grid>
-        <Grid item xs={2} sx={{ display: "flex"}}>
+        <Grid item xs={2} sx={{ display: "flex" }}>
           <Button
             variant="contained"
             startIcon={<AddIcon />}
             size="large"
             sx={{ flex: 2 }}
-            onClick={handleOpen}
+            onClick={handleOpenNewResearch}
           >
             Add
           </Button>
         </Grid>
         <Grid item xs={12}>
           <Stack direction="column" spacing={1}>
-          <Paper>
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
-              <Container>
-              <h3 sx={{p:5}}>Blood exploration</h3>
-              </Container>
-              <Stack direction="row" alignItems="center" justifyContent="space-around">
-                <h4>500/1000</h4>
-              <PeopleIcon sx={{m:2}}/>
-              <IconButton color="primary" size="large" sx={{ mx: 3, my: 2}}>
-                <DownloadIcon />
-              </IconButton>
+            <Paper>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Container>
+                  <h3 onClick={handleOpenNewResearch} sx={{ p: 5 }}>Blood exploration</h3>
+                </Container>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-around"
+                >
+                  <h4>500/1000</h4>
+                  <PeopleIcon sx={{ m: 2 }} />
+                  <IconButton
+                    color="primary"
+                    size="large"
+                    sx={{ mx: 3, my: 2 }}
+                  >
+                    <DownloadIcon />
+                  </IconButton>
+                </Stack>
               </Stack>
-            </Stack>
-          </Paper>
+            </Paper>
           </Stack>
         </Grid>
       </Grid>
 
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openNewResearch} onClose={handleCloseNewResearch}>
         <Box sx={style}>
           <Stack spacing={4}>
             <TextField
