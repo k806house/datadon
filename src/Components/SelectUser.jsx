@@ -45,18 +45,20 @@ export function SelectUser() {
         alignItems="center"
         direction="row"
         spacing={2}
-        sx={{}}
+        sx={{ p: 30}}
       >
         {!data.loading
           ? data.users.map((d, i) => (
             <div className="">
                 {" "}
                 <a
-                 href={d.photo_url}
+                 href="/find-data"
                 >
-                <img src={d.photo_url} alt="..." className="user-image"/>
-                <h4>{d.first_name}</h4>
+                    <img src={d.photo_url} className="user-image"/>
                 </a>
+                {/* <div className="caption"> */}
+                <h4>{d.first_name}</h4>
+                {/* </div> */}
             </div>
             ))
           : "loading"}
