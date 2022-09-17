@@ -19,11 +19,11 @@ import {
   InputBase,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import DownloadIcon from "@mui/icons-material/Download";
 import SearchIcon from "@mui/icons-material/Search";
-import PeopleIcon from "@mui/icons-material/People";
 
 import "../ReaserchInfo";
+import ResearchView from "../DTO/ResearchView.ts";
+import FindDataItem from "./FindDataItem";
 
 const style = {
   position: "absolute",
@@ -46,6 +46,14 @@ export function FindData() {
   const handleCloseResearchInfo = () => setOpenResearchInfo(false);
 
   const tags: Tag[] = JsonData;
+  var data: ResearchView[] = [];
+  data[0] = new ResearchView({
+    id: 1,
+    title: "test",
+    file: "test",
+    cntParticipant: 400,
+    cntParticipantFound: 40 
+  });
 
   return (
     <>
@@ -82,32 +90,7 @@ export function FindData() {
         </Grid>
         <Grid item xs={12}>
           <Stack direction="column" spacing={1}>
-            <Paper>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Container>
-                  <h3 onClick={handleOpenNewResearch} sx={{ p: 5 }}>Blood exploration</h3>
-                </Container>
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="space-around"
-                >
-                  <h4>500/1000</h4>
-                  <PeopleIcon sx={{ m: 2 }} />
-                  <IconButton
-                    color="primary"
-                    size="large"
-                    sx={{ mx: 3, my: 2 }}
-                  >
-                    <DownloadIcon />
-                  </IconButton>
-                </Stack>
-              </Stack>
-            </Paper>
+            <FindDataItem data={data[0]}></FindDataItem>
           </Stack>
         </Grid>
       </Grid>

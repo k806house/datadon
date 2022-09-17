@@ -1,7 +1,28 @@
-import React from 'react'
+import React from "react";
+import { 
+  Stack, IconButton, ListItemText, ListItemAvatar, Avatar,
+  Paper} from "@mui/material";
 
-export default function ShareDataItem() {
+import DeleteIcon from "@mui/icons-material/Delete";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
+import MyDataView from "../DTO/MyDataView.ts";
+
+export default function ShareDataItem(props) {
+  var myData = new MyDataView(props.data);
+  console.log(myData);
   return (
-    <div>ShareDataItem</div>
-  )
+    <Paper>
+      <Stack direction="row" alignItems="center" justifyContent="center">
+        <ListItemAvatar sx={{ p: 3 }}>
+          <Avatar>
+            <VaccinesIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Vaccination info" secondary="July 20, 2022" />
+        <IconButton color="primary" size="large" sx={{ margin: 3 }}>
+          <DeleteIcon />
+        </IconButton>
+      </Stack>
+    </Paper>
+  );
 }

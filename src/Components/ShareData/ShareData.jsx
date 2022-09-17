@@ -9,6 +9,8 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import SearchIcon from "@mui/icons-material/Search";
+import MyDataView from "../DTO/MyDataView.ts";
+import ShareDataItem from "./ShareDataItem";
 
 const style = {
   position: "absolute",
@@ -36,6 +38,14 @@ export function ShareData() {
 		setSelectedFile(event.target.files[0]);
 		setIsSelected(true);
 	};
+
+  var data: MyDataView[] = [];
+  data[0] = new MyDataView({
+    id: 1,
+    title: "test",
+    dateCreated: Date.now(),
+    iconId: 400
+  });
 
   return (
     <div>
@@ -69,22 +79,7 @@ export function ShareData() {
           </Button>
         </Grid>
         <Grid item xs={12}>
-          <Paper>
-            <Stack direction="row" alignItems="center" justifyContent="center">
-              <ListItemAvatar sx={{ p: 3 }}>
-                <Avatar>
-                  <VaccinesIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary="Vaccination info"
-                secondary="July 20, 2022"
-              />
-              <IconButton color="primary" size="large" sx={{ margin: 3 }}>
-                <DeleteIcon />
-              </IconButton>
-            </Stack>
-          </Paper>
+          <ShareDataItem data={data[0]}></ShareDataItem>
         </Grid>
       </Grid>
 
