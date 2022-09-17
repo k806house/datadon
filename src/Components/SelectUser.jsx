@@ -21,19 +21,13 @@ import axios from "axios";
 
 import "./SelectUser.css";
 
-export function SelectUser() {
-    const data = {
-        users: [
-            {
-                first_name: "Liza",
-                id: 2,
-                photo_url: "test"
-            }
-        ]
-    };
+import { useNavigate } from "react-router-dom";
 
-    const [user, setUser] = useState("");
-    const selectUser = (user) => setUser(user);
+export function SelectUser() {
+    const [token, setUser] = useState("");
+    const selectUser = (token) => setUser(token);
+
+    const navigate = useNavigate();
 
     const onSelect = (id) => {
         axios
@@ -42,35 +36,31 @@ export function SelectUser() {
             {user_id: id}
         )
         .then(function (response) {
-            console.log(response.data)
-            // setData({
-            //     users: response.data .user,
-            //     loading: false,
-            // });
+            console.log(response.data.authorization_token)
 
-            // console.log(response.data.user);
+            localStorage.setItem('token', JSON.stringify(response.data.authorization_token));
+            navigate("/home");
         });
-        // localStorage.setItem('user', JSON.stringify(user));
       };
 
-    // const [data, setData] = useState({
-    //     value: "",
-    //     loading: true,
-    // });
+    const [data, setData] = useState({
+        value: "",
+        loading: true,
+    });
 
-    // var users;
+    var users;
 
-    // axios
-    //     .post(
-    //     "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/get"
-    //     )
-    //     .then(function (response) {
-    //     setData({
-    //         users: response.data.user,
-    //         loading: false,
-    //     });
-    //     console.log(response.data.user);
-    //     });
+    axios
+        .post(
+        "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/get"
+        )
+        .then(function (response) {
+        setData({
+            users: response.data.user,
+            loading: false,
+        });
+        console.log(response.data.user);
+        });
   return (
     <div>
       <Stack 
@@ -90,14 +80,14 @@ export function SelectUser() {
             ? data.users.map((d, i) => (
                 <div className="">
                   {" "}
-                  <a 
-                    // href="/home"
-                >
-                    <img src={d.photo_url} className="user-image" />
-                  </a>
-                  <Button
+                  <Button 
+                    sx = {{
+                        borderRadius: 50,
+                    }}
                     onClick={() => onSelect(d.id)}
-                  ></Button>
+                  >
+                    <img src={d.photo_url} className="user-image" />
+                  </Button>
                   <h4>{d.first_name}</h4>
                 </div>
               ))
