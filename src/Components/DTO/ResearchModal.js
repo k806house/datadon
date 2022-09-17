@@ -1,12 +1,13 @@
 import Tag from "./Tag"
 
 export default class ResearchModal {
-
-    title: string;
-    description: string;
-    date: Date;
-    file: object;
-    tags: Tag[];
+    /**
+    *@param {string} title
+    *@param {string} description
+    *@param {Date} date
+    *@param {object} file
+    *@param {Tag[]} date
+     */
 
     constructor(data) {
         this.title = data?.title;
@@ -15,5 +16,4 @@ export default class ResearchModal {
         this.file = data?.file;
         this.tags = data?.tags;
     }
-
 }

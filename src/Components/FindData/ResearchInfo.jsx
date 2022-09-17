@@ -1,3 +1,5 @@
+//@ts-check
+import React from "react";
 import {
     Stack,
     Button,
@@ -5,7 +7,7 @@ import {
     Typography,
 } from "@mui/material";
 
-import {ResearchInfoView} from "../DTO/ResearchInfo.ts";
+import {ResearchInfoView} from "../DTO/ResearchInfo";
 
 const style = {
     position: "absolute",
@@ -34,10 +36,10 @@ export function ResearchInfo(props) {
                 <Stack spacing={4}>
                     <Typography>{data.title}</Typography>
                     <Typography>{data.description}</Typography>
-                    <Typography>{data.requiredData}</Typography>
-                    <Typography>{data.date}</Typography>
-                    <Typography>{data.cntParticipants}</Typography>
-                    <Typography>{data.totalCntParticipants}</Typography>
+                    <Typography>{data.tags}</Typography>
+                    <Typography>{data.dateCreated}</Typography>
+                    <Typography>{data.participantsCnt}</Typography>
+                    <Typography>{data.totalParticipantsCnt}</Typography>
                     <Button> Stop Research</Button>
                     <Button> Download </Button>
                 </Stack>

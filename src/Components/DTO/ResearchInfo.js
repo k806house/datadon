@@ -1,11 +1,13 @@
 export class ResearchInfoView {
-    id: number;
-    title: string;
-    description: string;
-    participantsCnt: number;
-    totalParticipantsCnt: number;
-    tags: string[];
-    dateCreated: Date;
+    /**
+    *@param {number} id
+    *@param {string} title
+    *@param {string} description
+    *@param {number} participantsCnt
+    *@param {number} totalParticipantsCnt
+    *@param {string[]} tags
+    *@param {Date} dateCreated
+     */
 
     constructor(data) {
         this.id = data?.id;

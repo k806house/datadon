@@ -1,3 +1,4 @@
+//@ts-check
 import React from "react";
 import { 
   Stack, IconButton, ListItemText, ListItemAvatar, Avatar,
@@ -5,7 +6,7 @@ import {
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
-import MyDataView from "../DTO/MyDataView.ts";
+import MyDataView from "../DTO/MyDataView";
 
 export default function ShareDataItem(props) {
   var myData = new MyDataView(props.data);
@@ -18,7 +19,7 @@ export default function ShareDataItem(props) {
             <VaccinesIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Vaccination info" secondary="July 20, 2022" />
+        <ListItemText primary={myData.title} secondary={myData.dateCreated.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"}) } />
         <IconButton color="primary" size="large" sx={{ margin: 3 }}>
           <DeleteIcon />
         </IconButton>

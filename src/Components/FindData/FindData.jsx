@@ -1,8 +1,9 @@
+//@ts-check
 import React from "react";
 import { useState } from "react";
 
 import "./FindData.css";
-import Tag from "../DTO/Tag.ts";
+import Tag from "../DTO/Tag";
 import JsonData from "../../data/tags.json";
 
 import {
@@ -10,41 +11,23 @@ import {
   IconButton,
   Grid,
   Button,
-  Autocomplete,
-  TextField,
-  Box,
   Modal,
-  Container,
   Paper,
   InputBase,
-  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
-
-import { ResearchInfo } from  "./ResearchInfo";
 import { NewResearch } from "./NewResearch";
-import ResearchView from "../DTO/ResearchView.ts";
+import ResearchView from "../DTO/ResearchView";
 import FindDataItem from "./FindDataItem";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 600,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-};
 
 export function FindData() {
   const [openNewResearch, setOpenNewResearch] = useState(false);
   const handleOpenNewResearch = () => setOpenNewResearch(true);
   const handleCloseNewResearch = () => setOpenNewResearch(false);
 
-  const tags: Tag[] = JsonData;
-  var data: ResearchView[] = [];
+  var data = [];
   data[0] = new ResearchView({
     id: 1,
     title: "test",

@@ -1,5 +1,6 @@
+//@ts-check
 import {React, useState} from "react";
-import ResearchView from "../DTO/ResearchView.ts";
+import ResearchView from "../DTO/ResearchView";
 import { ResearchInfo } from "./ResearchInfo";
 import { Stack, IconButton, Container, Paper, Modal } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
