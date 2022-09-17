@@ -1,11 +1,12 @@
 import Axios from "axios";
 
 const uploadFile = async () => {
+    const token = JSON.parse(localStorage.getItem('token'));
     await Axios.post("https:\//01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/upload",
          "",
         {
             headers: {
-               Authorization: '32190d393d00fb9694ccaf49f1b79a38',
+               Authorization: token,
                'Content-Type': 'application/json'}})
         .then(async response =>{
             await Axios.put(response.data.upload_link, response.data.tmp_file_name)
