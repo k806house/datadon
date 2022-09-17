@@ -4,7 +4,7 @@ export default class DataView {
     dateCreated: Date;
     iconId: number;
 
-    constructor(data = null) {
+    constructor(data) {
         this.title = data?.title;
         this.dateCreated = data?.dateCreated;
         this.iconId = data?.iconId;

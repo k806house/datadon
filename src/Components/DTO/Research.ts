@@ -8,7 +8,7 @@ export default class Research {
     file: object;
     tags: Tag[];
 
-    constructor(data = null) {
+    constructor(data) {
         this.title = data?.title;
         this.description = data?.description;
         this.date = data?.date;
