@@ -1,3 +1,4 @@
+//@ts-check
 import React, { useState } from "react";
 import { 
   Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
@@ -9,7 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import SearchIcon from "@mui/icons-material/Search";
-import MyDataView from "../DTO/MyDataView.ts";
+import MyDataView from "../DTO/MyDataView";
 import ShareDataItem from "./ShareDataItem";
 
 const style = {
