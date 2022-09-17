@@ -2,3 +2,12 @@
     width: 100px;
     border-radius: 50%;
 }
+
+h2 {
+    margin: auto;
+    color: #27528d;
+}
+
+.wrap {
+    margin: auto;
+}
