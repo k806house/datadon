@@ -17,13 +17,14 @@ import {
   Container,
   Paper,
   InputBase,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DownloadIcon from "@mui/icons-material/Download";
 import SearchIcon from "@mui/icons-material/Search";
 import PeopleIcon from "@mui/icons-material/People";
 
-import "../ReaserchInfo";
+import { ResearchInfo } from  "../ResearchInfo";
 
 const style = {
   position: "absolute",
@@ -89,7 +90,7 @@ export function FindData() {
                 justifyContent="space-between"
               >
                 <Container>
-                  <h3 onClick={handleOpenNewResearch} sx={{ p: 5 }}>Blood exploration</h3>
+                  <h3 onClick={handleOpenResearchInfo} sx={{ p: 5 }}>Blood exploration</h3>
                 </Container>
                 <Stack
                   direction="row"
@@ -148,6 +149,10 @@ export function FindData() {
             <Button>Save</Button>
           </Stack>
         </Box>
+      </Modal>
+
+      <Modal open={openResearchInfo} onClose={handleCloseResearchInfo}>
+        <ResearchInfo />
       </Modal>
     </>
   );
