@@ -1,15 +1,9 @@
-export class DataView {
+export default class DataView {
 
-    /** @type {string} */
-    title;
-    /** @type {Date} */
-    dateCreated;
-    /** @type {int} */
-    iconId;
+    title: string;
+    dateCreated: Date;
+    iconId: number;
 
-    /**
-     * @param {DataView} data
-     */
     constructor(data = null) {
         this.title = data?.title;
         this.dateCreated = data?.dateCreated;

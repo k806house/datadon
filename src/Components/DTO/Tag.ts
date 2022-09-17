@@ -1,11 +1,7 @@
-export class Tag {
+export default class Tag {
 
-    /** @type {string} */
-    title;
+    title: string;
 
-    /**
-     * @param {Tag} data
-     */
     constructor(data = null) {
         this.title = data?.title;
     }

@@ -1,15 +1,9 @@
-export class DataModal {
+export default class DataModal {
 
-    /** @type {string} */
-    title;
-    /** @type {object} */
-    file;
-    /** @type {int} */
-    cntParticipant;
+    title: string;
+    file: object;
+    cntParticipant: number;
 
-    /**
-     * @param {DataModal} data
-     */
     constructor(data = null) {
         this.title = data?.title;
         this.file = data?.file;
