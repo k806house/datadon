@@ -19,14 +19,17 @@ const style = {
 export function NewResearch() {
   // const tags: Tag[] = JsonData;
 
-  const [tags, tagsSet] = useState([]);
+  const [tags, tagsSet] = useState([{id: 1, name: "Blood"}]);
   useEffect(() => {
     async function fetchTags() {
       axios
         .post(
           "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/tag/get"
         )
-        .then((response) => tagsSet(response.data));
+        .then((response) => {
+          console.log(response.data.tags);
+          tagsSet(response.data.tags)
+        });
     }
 
     fetchTags();
@@ -71,7 +74,7 @@ export function NewResearch() {
                   required
                   id="tags-outlined"
                   options={tags}
-                  getOptionLabel={(option) => option.title}
+                  getOptionLabel={(option) => option.name}
                   filterSelectedOptions
                   defaultValue={[tags[0]]}
                   onChange={(e, data) => setValue("tags", data)}
@@ -90,7 +93,7 @@ export function NewResearch() {
               variant="contained"
               type="submit"
             >
-            Save
+              Save
             </Button>
           </Stack>
         </form>
