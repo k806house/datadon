@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Stack, Button } from "@mui/material";
+import { Stack, Button, Typography } from "@mui/material";
 
 import axios from "axios";
 
@@ -62,6 +62,11 @@ export function SelectUser() {
               >
                 <img src={d.photo_url} className="user-image" />
               </Button>
+              <Typography
+                align="center"
+              >
+                {d.first_name}
+              </Typography>
             </div>
           ))}
         </Stack>
