@@ -3,6 +3,7 @@ import {
   Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
   Paper, InputBase, Modal, TextField, Box 
 } from "@mui/material";
+import { useForm } from "react-hook-form";
 
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -27,6 +28,9 @@ export function ShareData() {
 
   const [selectedFile, setSelectedFile] = useState();
 	const [isSelected, setIsSelected] = useState(false);
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => alert(JSON.stringify(data, null, 4));
 
   const changeHandler = (event) => {
 		setSelectedFile(event.target.files[0]);
@@ -86,34 +90,42 @@ export function ShareData() {
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Stack spacing={4}>
-            <TextField
-              required
-              id="outlined-required"
-              label="Required"
-              defaultValue="Name"
-            />
-            <Button
-              variant="contained"
-              component="label"
-            >
-              Select a file
-              <input
-                type="file"
-                hidden
-                onChange={changeHandler}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing={4}>
+              <TextField
+                required
+                id="outlined-required"
+                label="Required"
+                defaultValue="Name"
+                inputProps={register('name')}
               />
-            </Button>
-            {isSelected ? (
-              <div>
-                <p> {selectedFile.name}</p>
-              </div>
-            ) : (
-              <p>No file selected</p>
-            )}
-            
-            <Button>Save</Button>
-          </Stack>
+              <Button
+                variant="contained"
+                component="label"
+              >
+                Select a file
+                <input
+                  type="file"
+                  hidden
+                  onChange={changeHandler}
+                />
+              </Button>
+              {isSelected ? (
+                <div>
+                  <p> {selectedFile.name}</p>
+                </div>
+              ) : (
+                <p>No file selected</p>
+              )}
+              
+              <Button
+                variant="contained"
+                type="submit"
+              >
+                Save
+              </Button>
+            </Stack>
+          </form>
         </Box>
       </Modal>
     </div>
