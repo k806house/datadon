@@ -13,18 +13,18 @@ import VaccinesIcon from "@mui/icons-material/Vaccines";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Box from '@mui/material/Box';
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 600,
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
 };
@@ -37,69 +37,53 @@ export function ShareData() {
   return (
     <div>
       <h1>My data</h1>
-      <Stack
-        direction="column"
-        justifyContent="center"
-        alignItems="flex-start"
-        spacing={1}
-      >
-        <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={10}>
-            <Paper
-              component="form"
-              sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <IconButton type="button" sx={{ p: "8px" }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
-              <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search data..." />
-            </Paper>
-          </Grid>
-          <Grid
-            item
-            xs={2}
+
+      <Grid container spacing={1} justifyContent="center">
+        <Grid item xs={10}>
+          <Paper
+            component="form"
             sx={{
+              p: "2px 4px",
               display: "flex",
+              alignItems: "center",
             }}
           >
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              size="large"
-              sx={{ flex: 2 }}
-              onClick={handleOpen}
-            >
-              Add
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <ListItemAvatar sx={{ p: 3 }}>
-                  <Avatar>
-                    <VaccinesIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Vaccination info"
-                  secondary="July 20, 2022"
-                />
-                <IconButton color="primary" size="large" sx={{ margin: 3 }}>
-                  <DeleteIcon />
-                </IconButton>
-              </Stack>
-            </Paper>
-          </Grid>
+            <IconButton type="button" sx={{ p: "8px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+            <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search data..." />
+          </Paper>
         </Grid>
-      </Stack>
+        <Grid item xs={2} sx={{ display: "flex"}}>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            size="large"
+            sx={{ flex: 2 }}
+            onClick={handleOpen}
+          >
+            Add
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper>
+            <Stack direction="row" alignItems="center" justifyContent="center">
+              <ListItemAvatar sx={{ p: 3 }}>
+                <Avatar>
+                  <VaccinesIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary="Vaccination info"
+                secondary="July 20, 2022"
+              />
+              <IconButton color="primary" size="large" sx={{ margin: 3 }}>
+                <DeleteIcon />
+              </IconButton>
+            </Stack>
+          </Paper>
+        </Grid>
+      </Grid>
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
@@ -128,7 +112,4 @@ export function ShareData() {
   );
 }
 
-const explores = [
-  { title: 'Blood'},
-  { title: 'Vactination'}
-]
+const explores = [{ title: "Blood" }, { title: "Vactination" }];
