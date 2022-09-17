@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import "./FindData.css";
+import JsonData from '../../data/tags.json';
 
 import { 
   Stack, 
@@ -35,6 +36,7 @@ export function FindData() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const tags: Tag[] = JsonData;
 
   return (
     <>
@@ -107,9 +109,9 @@ export function FindData() {
               multiple
               required
               id="tags-outlined"
-              options={explores}
+              options={tags}
               getOptionLabel={(option) => option.title}
-              defaultValue={[explores[0]]}
+              defaultValue={[tags[0].title]}
               filterSelectedOptions
               renderInput={(params) => (
                 <TextField
@@ -126,5 +128,3 @@ export function FindData() {
     </>
   );
 }
-
-const explores = [{ title: "Blood"}, { title: "Vactination" }];
