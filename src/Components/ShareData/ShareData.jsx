@@ -4,7 +4,10 @@ import {
   Paper, InputBase, Modal, TextField, Box 
 } from "@mui/material";
 
-import { AddIcon, DeleteIcon, VaccinesIcon, SearchIcon } from "@mui/icons-material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
+import SearchIcon from "@mui/icons-material/Search";
 
 const style = {
   position: "absolute",
