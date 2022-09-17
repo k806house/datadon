@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Stack, Button, Autocomplete, TextField, Box } from "@mui/material";
 import axios from "axios";
 import { useForm, useController, Controller } from "react-hook-form";
@@ -18,13 +19,18 @@ const style = {
 export function NewResearch() {
   // const tags: Tag[] = JsonData;
 
-  var tags;
-  axios.post("https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/tag/get"
-  )
-  .then(function(response) {
-    tags = response.data.tags;
-    console.log(tags);
-  });
+  const [tags, tagsSet] = useState([]);
+  useEffect(() => {
+    async function fetchTags() {
+      axios
+        .post(
+          "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/tag/get"
+        )
+        .then((response) => tagsSet(response.data));
+    }
+
+    fetchTags();
+  }, []);
 
   const {
       control,
@@ -33,7 +39,7 @@ export function NewResearch() {
       formState: { errors },
       setValue,
   } = useForm();
-  const onSubmit = (data) => console.log(JSON.stringify(data, null, 4));
+  const onSubmit = (data) => {};
 
   return (
     <div>
