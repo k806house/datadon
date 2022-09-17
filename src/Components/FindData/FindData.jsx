@@ -22,6 +22,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DownloadIcon from "@mui/icons-material/Download";
 import SearchIcon from "@mui/icons-material/Search";
 import PeopleIcon from "@mui/icons-material/People";
+import { useForm, useController, Controller } from "react-hook-form";
 
 import "../ReaserchInfo";
 
@@ -44,6 +45,15 @@ export function FindData() {
   const [openResearchInfo, setOpenResearchInfo] = useState(false);
   const handleOpenResearchInfo = () => setOpenResearchInfo(true);
   const handleCloseResearchInfo = () => setOpenResearchInfo(false);
+
+  const {
+      control,
+      register,
+      handleSubmit,
+      formState: { errors },
+      setValue,
+  } = useForm();
+  const onSubmit = (data) => console.log(JSON.stringify(data, null, 4));
 
   const tags: Tag[] = JsonData;
 
@@ -114,39 +124,56 @@ export function FindData() {
 
       <Modal open={openNewResearch} onClose={handleCloseNewResearch}>
         <Box sx={style}>
-          <Stack spacing={4}>
-            <TextField
-              required
-              id="outlined-required"
-              label="Required"
-              defaultValue="Name"
-            />
-            <TextField
-              id="outlined-multiline"
-              label="Required"
-              multiline
-              required
-              rows="3"
-              defaultValue="Description"
-            />
-            <Autocomplete
-              multiple
-              required
-              id="tags-outlined"
-              options={tags}
-              getOptionLabel={(option) => option.title}
-              defaultValue={[tags[0]]}
-              filterSelectedOptions
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="filterSelectedOptions"
-                  placeholder="Needed data"
-                />
-              )}
-            />
-            <Button>Save</Button>
-          </Stack>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing={4}>
+              <TextField
+                required
+                id="outlined-required"
+                label="Required"
+                defaultValue="Name"
+                inputProps={register('name')}
+              />
+              <TextField
+                id="outlined-multiline"
+                label="Required"
+                multiline
+                required
+                rows="3"
+                defaultValue="Description"
+                inputProps={register('description')}
+              />
+              <Controller
+                name="tags"
+                render={(props) => 
+                  <Autocomplete
+                    {...props}
+                    multiple
+                    required
+                    id="tags-outlined"
+                    options={tags}
+                    getOptionLabel={(option) => option.title}
+                    filterSelectedOptions
+                    defaultValue={[tags[0]]}
+                    onChange={(e, data) => setValue("tags", data)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="filterSelectedOptions"
+                        placeholder="Needed data"
+                      />
+                    )}
+                  />
+                }
+                control={control}
+              />
+              <Button
+                variant="contained"
+                type="submit"
+              >
+              Save
+              </Button>
+            </Stack>
+          </form>
         </Box>
       </Modal>
     </>
