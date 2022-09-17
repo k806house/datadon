@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Stack, IconButton, Grid, Button } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -13,8 +13,27 @@ import VaccinesIcon from "@mui/icons-material/Vaccines";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+};
 
 export function ShareData() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div>
       <h1>My data</h1>
@@ -52,6 +71,7 @@ export function ShareData() {
               startIcon={<AddIcon />}
               size="large"
               sx={{ flex: 2 }}
+              onClick={handleOpen}
             >
               Add
             </Button>
@@ -80,6 +100,49 @@ export function ShareData() {
           </Grid>
         </Grid>
       </Stack>
+
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
+          <Stack spacing={4}>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              defaultValue="Name"
+            />
+            <TextField
+              id="outlined-multiline"
+              label="Required"
+              multiline
+              required
+              rows="3"
+              defaultValue="Description"
+            />
+            <Autocomplete
+              multiple
+              required
+              id="tags-outlined"
+              options={explores}
+              getOptionLabel={(option) => option.title}
+              defaultValue={[explores[0]]}
+              filterSelectedOptions
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="filterSelectedOptions"
+                  placeholder="Needed data"
+                />
+              )}
+            />
+            <Button>Save</Button>
+          </Stack>
+        </Box>
+      </Modal>
     </div>
   );
 }
+
+const explores = [
+  { title: 'Blood'},
+  { title: 'Vactination'}
+]
