@@ -5,18 +5,29 @@ import axios from "axios";
 
 import "./SelectUser.css";
 
+import { useNavigate } from "react-router-dom";
+
 export function SelectUser() {
-  const [users, usersSet] = useState([]);
-  useEffect(() => {
-    async function fetchUsers() {
+    const navigate = useNavigate();
+
+    const onSelect = (id) => {
         axios
-        .post("https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/get")
-        .then((response) => usersSet(response.data.user));
-      }
+        .post(
+            "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/auth", 
+            {user_id: id}
+        )
+        .then(function (response) {
+            console.log(response.data.authorization_token)
 
-    fetchUsers();
-  }, []);
+            localStorage.setItem('token', JSON.stringify(response.data.authorization_token));
+            navigate("/home");
+        });
+      };
 
+    const [users, setUsers] = useState({
+        value: "",
+        loading: true,
+    });
   return (
     <div>
       <Stack spacing={4} className="wrap">
@@ -31,10 +42,14 @@ export function SelectUser() {
         >
           {users.map((d, i) => (
             <div key={d.id} className="">
-              <a href="/find-data">
-                <img src={d.photo_url} className="user-image" />
-              </a>
-              <h4>{d.name}</h4>
+              <Button 
+                    sx = {{
+                        borderRadius: 50,
+                    }}
+                    onClick={() => onSelect(d.id)}
+                  >
+                    <img src={d.photo_url} className="user-image" />
+                </Button>
             </div>
           ))}
         </Stack>
