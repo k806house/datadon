@@ -24,9 +24,6 @@ import "./SelectUser.css";
 import { useNavigate } from "react-router-dom";
 
 export function SelectUser() {
-    const [token, setUser] = useState("");
-    const selectUser = (token) => setUser(token);
-
     const navigate = useNavigate();
 
     const onSelect = (id) => {
@@ -43,21 +40,19 @@ export function SelectUser() {
         });
       };
 
-    const [data, setData] = useState({
+    const [users, setUsers] = useState({
         value: "",
         loading: true,
     });
-
-    var users;
 
     axios
         .post(
         "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/get"
         )
         .then(function (response) {
-        setData({
-            users: response.data.user,
-            loading: false,
+            setUsers({
+                value: response.data.user,
+                loading: false,
         });
         console.log(response.data.user);
         });
@@ -76,8 +71,8 @@ export function SelectUser() {
           spacing={2}
           sx={{}}
         >
-          {!data.loading
-            ? data.users.map((d, i) => (
+          {!users.loading
+            ? users.value.map((d, i) => (
                 <div className="">
                   {" "}
                   <Button 
