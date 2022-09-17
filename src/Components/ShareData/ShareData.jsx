@@ -10,8 +10,10 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VaccinesIcon from "@mui/icons-material/Vaccines";
 import SearchIcon from "@mui/icons-material/Search";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
 import MyDataView from "../DTO/MyDataView";
 import ShareDataItem from "./ShareDataItem";
+import uploadFile from "./S3Upload";
 
 const style = {
   position: "absolute",
@@ -38,11 +40,34 @@ export function ShareData() {
       formState: { errors },
       setValue,
   } = useForm();
-  const onSubmit = (data) => console.log(JSON.stringify(data, null, 4));
 
-  const changeHandler = (event, data) => {
-    setValue("file", event.target.files[0]);
-		setSelectedFile(event.target.files[0]);
+  const onSubmit = (data) => {
+    console.log(JSON.stringify(data, null, 4));
+  }
+
+  const handleFileUpload = (e) => {
+    if (!e.target.files) {
+      return;
+    }
+
+    const file = e.target.files[0];
+    const { name } = file;
+    uploadFile();
+    // console.log(s3Data);
+    // const uploadUrl = s3Data['upload_link'];
+    // const filenameTmp = s3Data['tmp_file_name'];
+    // uploadFile(uploadUrl, filenameTmp);
+    // const fileReader = new FileReader();
+    // fileReader.readAsText(file);
+    // fileReader.onload = function() {
+    //   console.log(fileReader.result);
+    // };
+    // fileReader.onerror = function() {
+    //   console.log(fileReader.error);
+    // };
+
+    //setValue("file", e.target.files[0]);
+		setSelectedFile(e.target.files[0]);
 		setIsSelected(true);
 	};
 
@@ -104,12 +129,13 @@ export function ShareData() {
               <Button
                 variant="contained"
                 component="label"
+                startIcon={<UploadFileIcon />}
               >
                 Select a file
                 <input
                   type="file"
                   hidden
-                  onChange={changeHandler}
+                  onChange={handleFileUpload}
                 />
               </Button>
               {isSelected ? (
