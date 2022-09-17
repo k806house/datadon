@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { 
-  Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
-  Paper, InputBase, Modal, TextField, Box 
+  Stack, IconButton, Grid, Button, Container,
+  Paper, InputBase, Modal, TextField, Box,
+  ListItemAvatar, ListItemText, Avatar
 } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -35,9 +36,8 @@ export function ShareData() {
 
   return (
     <div>
-      <h1>My data</h1>
-
-      <Grid container spacing={1} justifyContent="center">
+      <h1>My research</h1>
+      <Grid container spacing={2} justifyContent="center">
         <Grid item xs={10}>
           <Paper
             component="form"
@@ -50,7 +50,7 @@ export function ShareData() {
             <IconButton type="button" sx={{ p: "8px" }} aria-label="search">
               <SearchIcon />
             </IconButton>
-            <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search data..." />
+            <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search explorations..." />
           </Paper>
         </Grid>
         <Grid item xs={2} sx={{ display: "flex"}}>

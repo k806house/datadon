@@ -4,22 +4,12 @@ import { useState } from "react";
 import "./FindData.css";
 import JsonData from '../../data/tags.json';
 
-import { 
-  Stack, 
-  IconButton, 
-  Grid, 
-  Button, 
-  Autocomplete, 
-  TextField, 
-  Box, 
-  Modal, 
-  Container, 
-  Paper,
-  InputBase } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import DownloadIcon from "@mui/icons-material/Download";
-import SearchIcon from "@mui/icons-material/Search";
-import PeopleIcon from '@mui/icons-material/People';
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import { Stack, IconButton, Grid, Button } from "@mui/material";
+
 
 const style = {
   position: "absolute",
@@ -40,54 +30,71 @@ export function FindData() {
 
   return (
     <>
-      <h1>My research</h1>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={10}>
-          <Paper
-            component="form"
+      <h1>My data</h1>
+      {/* <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="flex-start"
+        spacing={1}
+      >
+        <Grid container spacing={1} justifyContent="center">
+          <Grid item xs={10}>
+            <Paper
+              component="form"
+              sx={{
+                p: "2px 4px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <IconButton type="button" sx={{ p: "8px" }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+              <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search data..." />
+            </Paper>
+          </Grid>
+          <Grid
+            item
+            xs={2}
             sx={{
-              p: "2px 4px",
               display: "flex",
-              alignItems: "center",
             }}
           >
-            <IconButton type="button" sx={{ p: "8px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-            <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search explorations..." />
-          </Paper>
-        </Grid>
-        <Grid item xs={2} sx={{ display: "flex"}}>
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            size="large"
-            sx={{ flex: 2 }}
-            onClick={handleOpen}
-          >
-            Add
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack direction="column" spacing={1}>
-          <Paper>
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
-              <Container>
-              <h3 sx={{p:5}}>Blood exploration</h3>
-              </Container>
-              <Stack direction="row" alignItems="center" justifyContent="space-around">
-                <h4>500/1000</h4>
-              <PeopleIcon sx={{m:2}}/>
-              <IconButton color="primary" size="large" sx={{ mx: 3, my: 2}}>
-                <DownloadIcon />
-              </IconButton>
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              size="large"
+              sx={{ flex: 2 }}
+              onClick={handleOpen}
+            >
+              Add
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <ListItemAvatar sx={{ p: 3 }}>
+                  <Avatar>
+                    <VaccinesIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary="Vaccination info"
+                  secondary="July 20, 2022"
+                />
+                <IconButton color="primary" size="large" sx={{ margin: 3 }}>
+                  <DeleteIcon />
+                </IconButton>
               </Stack>
-            </Stack>
-          </Paper>
-          </Stack>
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
-
+      </Stack> */}
+      <Button onClick={handleOpen}>Open modal</Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Stack spacing={4}>
