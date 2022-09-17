@@ -22,23 +22,55 @@ import axios from "axios";
 import "./SelectUser.css";
 
 export function SelectUser() {
-  const [data, setData] = useState({
-    value: "",
-    loading: true,
-  });
+    const data = {
+        users: [
+            {
+                first_name: "Liza",
+                id: 2,
+                photo_url: "test"
+            }
+        ]
+    };
 
-  var users;
-  axios
-    .post(
-      "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/get"
-    )
-    .then(function (response) {
-      setData({
-        users: response.data.user,
-        loading: false,
-      });
-      console.log(response.data.user);
-    });
+    const [user, setUser] = useState("");
+    const selectUser = (user) => setUser(user);
+
+    const onSelect = (id) => {
+        axios
+        .post(
+            "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/auth", 
+            {user_id: id}
+        )
+        .then(function (response) {
+            console.log(response.data)
+            // setData({
+            //     users: response.data .user,
+            //     loading: false,
+            // });
+
+            // console.log(response.data.user);
+        });
+        // localStorage.setItem('user', JSON.stringify(user));
+      };
+
+    // const [data, setData] = useState({
+    //     value: "",
+    //     loading: true,
+    // });
+
+    // var users;
+
+    // axios
+    //     .post(
+    //     "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/user/get"
+    //     )
+    //     .then(function (response) {
+    //     setData({
+    //         users: response.data.user,
+    //         loading: false,
+    //     });
+    //     console.log(response.data.user);
+    //     });
   return (
     <div>
       <Stack 
@@ -58,9 +90,14 @@ export function SelectUser() {
             ? data.users.map((d, i) => (
                 <div className="">
                   {" "}
-                  <a href="/find-data">
+                  <a 
+                    // href="/home"
+                >
                     <img src={d.photo_url} className="user-image" />
                   </a>
+                  <Button
+                    onClick={() => onSelect(d.id)}
+                  ></Button>
                   <h4>{d.first_name}</h4>
                 </div>
               ))
