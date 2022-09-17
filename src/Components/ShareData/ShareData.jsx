@@ -1,22 +1,10 @@
-import React, { Component, useState } from "react";
-import { Stack, IconButton, Grid, Button } from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import BloodtypeIcon from "@mui/icons-material/Bloodtype";
-import ThermostatIcon from "@mui/icons-material/Thermostat";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import VaccinesIcon from "@mui/icons-material/Vaccines";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
+import React, { useState } from "react";
+import { 
+  Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
+  Paper, InputBase, Modal, TextField, Box 
+} from "@mui/material";
+
+import { AddIcon, DeleteIcon, VaccinesIcon, SearchIcon } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -33,6 +21,14 @@ export function ShareData() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [selectedFile, setSelectedFile] = useState();
+	const [isSelected, setIsSelected] = useState(false);
+
+  const changeHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+		setIsSelected(true);
+	};
 
   return (
     <div>
@@ -98,12 +94,21 @@ export function ShareData() {
               variant="contained"
               component="label"
             >
-              Upload File
+              Select a file
               <input
                 type="file"
                 hidden
+                onChange={changeHandler}
               />
             </Button>
+            {isSelected ? (
+              <div>
+                <p> {selectedFile.name}</p>
+              </div>
+            ) : (
+              <p>No file selected</p>
+            )}
+            
             <Button>Save</Button>
           </Stack>
         </Box>
