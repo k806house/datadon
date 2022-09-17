@@ -111,7 +111,11 @@ export function ShareData() {
           </Button>
         </Grid>
         <Grid item xs={12}>
-          <ShareDataItem data={data[0]}></ShareDataItem>
+          {
+            data ? data.map((d, i) => (
+            <ShareDataItem data={d} key={i}></ShareDataItem>))
+            : "loading"
+          }
         </Grid>
       </Grid>
 

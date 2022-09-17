@@ -1,4 +1,5 @@
 import { Stack, Button, Autocomplete, TextField, Box } from "@mui/material";
+import axios from "axios";
 import { useForm, useController, Controller } from "react-hook-form";
 
 import JsonData from "../../data/tags.json";
@@ -15,7 +16,15 @@ const style = {
 };
 
 export function NewResearch() {
-  const tags: Tag[] = JsonData;
+  // const tags: Tag[] = JsonData;
+
+  var tags;
+  axios.post("https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/tag/get"
+  )
+  .then(function(response) {
+    tags = response.data.tags;
+    console.log(tags);
+  });
 
   const {
       control,

@@ -22,6 +22,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import { NewResearch } from "./NewResearch";
 import ResearchView from "../DTO/ResearchView";
 import FindDataItem from "./FindDataItem";
+import axios from "axios";
 
 
 export function FindData() {
