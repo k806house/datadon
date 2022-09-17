@@ -1,4 +1,6 @@
-import { Stack, Button, Box, Typography } from "@mui/material";
+import { Stack, Button, Autocomplete, TextField, Box } from "@mui/material";
+
+import JsonData from "../../data/tags.json";
 
 const style = {
   position: "absolute",
@@ -12,6 +14,8 @@ const style = {
 };
 
 export function NewResearch() {
+  const tags: Tag[] = JsonData;
+
   return (
     <div>
       <Box sx={style}>

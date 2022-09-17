@@ -22,8 +22,8 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { ResearchInfo } from  "../ResearchInfo";
-import { NewResearch } from "../NewResearch";
+import { ResearchInfo } from  "./ResearchInfo";
+import { NewResearch } from "./NewResearch";
 import ResearchView from "../DTO/ResearchView.ts";
 import FindDataItem from "./FindDataItem";
 
@@ -42,10 +42,6 @@ export function FindData() {
   const [openNewResearch, setOpenNewResearch] = useState(false);
   const handleOpenNewResearch = () => setOpenNewResearch(true);
   const handleCloseNewResearch = () => setOpenNewResearch(false);
-
-  const [openResearchInfo, setOpenResearchInfo] = useState(false);
-  const handleOpenResearchInfo = () => setOpenResearchInfo(true);
-  const handleCloseResearchInfo = () => setOpenResearchInfo(false);
 
   const tags: Tag[] = JsonData;
   var data: ResearchView[] = [];
@@ -99,10 +95,6 @@ export function FindData() {
 
       <Modal open={openNewResearch} onClose={handleCloseNewResearch}>
         <NewResearch />
-      </Modal>
-
-      <Modal open={openResearchInfo} onClose={handleCloseResearchInfo}>
-        <ResearchInfo />
       </Modal>
     </>
   );

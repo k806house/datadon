@@ -1,37 +1,46 @@
-import React from "react";
+import {React, useState} from "react";
 import ResearchView from "../DTO/ResearchView.ts";
-import {
-  Stack,
-  IconButton,
-  Container,
-  Paper
-} from "@mui/material";
+import { ResearchInfo } from "./ResearchInfo";
+import { Stack, IconButton, Container, Paper, Modal } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import PeopleIcon from "@mui/icons-material/People";
 
-
-
-export default function FindDataItem(props){
+export default function FindDataItem(props) {
   var research = new ResearchView(props.data);
   console.log(research);
+
+  const [openResearchInfo, setOpenResearchInfo] = useState(false);
+  const handleOpenResearchInfo = () => setOpenResearchInfo(true);
+  const handleCloseResearchInfo = () => setOpenResearchInfo(false);
+
   return (
-    <Paper>
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <Container>
-          <h3 sx={{ p: 5 }}>test</h3>
-        </Container>
+    <>
+      <Paper>
         <Stack
           direction="row"
           alignItems="center"
-          justifyContent="space-around"
+          justifyContent="space-between"
         >
-          <h4>500/1000</h4>
-          <PeopleIcon sx={{ m: 2 }} />
-          <IconButton color="primary" size="large" sx={{ mx: 3, my: 2 }}>
-            <DownloadIcon />
-          </IconButton>
+          <Container>
+            <h3 onClick={handleOpenResearchInfo} sx={{ p: 5 }}>test</h3>
+          </Container>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-around"
+          >
+            <h4>500/1000</h4>
+            <PeopleIcon sx={{ m: 2 }} />
+            <IconButton color="primary" size="large" sx={{ mx: 3, my: 2 }}>
+              <DownloadIcon />
+            </IconButton>
+          </Stack>
         </Stack>
-      </Stack>
-    </Paper>
+      </Paper>
+
+      <Modal open={openResearchInfo} onClose={handleCloseResearchInfo}>
+        <ResearchInfo />
+      </Modal>
+    </>
   );
 }
