@@ -110,30 +110,16 @@ export function ShareData() {
               label="Required"
               defaultValue="Name"
             />
-            <TextField
-              id="outlined-multiline"
-              label="Required"
-              multiline
-              required
-              rows="3"
-              defaultValue="Description"
-            />
-            <Autocomplete
-              multiple
-              required
-              id="tags-outlined"
-              options={explores}
-              getOptionLabel={(option) => option.title}
-              defaultValue={[explores[0]]}
-              filterSelectedOptions
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="filterSelectedOptions"
-                  placeholder="Needed data"
-                />
-              )}
-            />
+            <Button
+              variant="contained"
+              component="label"
+            >
+              Upload File
+              <input
+                type="file"
+                hidden
+              />
+            </Button>
             <Button>Save</Button>
           </Stack>
         </Box>
