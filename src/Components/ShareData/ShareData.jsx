@@ -4,7 +4,7 @@ import {
   Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
   Paper, InputBase, Modal, TextField, Box 
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, useController } from "react-hook-form";
 
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -32,10 +32,16 @@ export function ShareData() {
   const [selectedFile, setSelectedFile] = useState();
 	const [isSelected, setIsSelected] = useState(false);
 
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => alert(JSON.stringify(data, null, 4));
+  const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      setValue,
+  } = useForm();
+  const onSubmit = (data) => console.log(JSON.stringify(data, null, 4));
 
-  const changeHandler = (event) => {
+  const changeHandler = (event, data) => {
+    setValue("file", event.target.files[0]);
 		setSelectedFile(event.target.files[0]);
 		setIsSelected(true);
 	};
@@ -131,5 +137,3 @@ export function ShareData() {
     </div>
   );
 }
-
-const explores = [{ title: "Blood" }, { title: "Vactination" }];

@@ -17,6 +17,8 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
+import PeopleIcon from "@mui/icons-material/People";
+
 import { NewResearch } from "./NewResearch";
 import ResearchView from "../DTO/ResearchView";
 import FindDataItem from "./FindDataItem";
@@ -26,6 +28,8 @@ export function FindData() {
   const [openNewResearch, setOpenNewResearch] = useState(false);
   const handleOpenNewResearch = () => setOpenNewResearch(true);
   const handleCloseNewResearch = () => setOpenNewResearch(false);
+
+  const tags: Tag[] = JsonData;
 
   var data = [];
   data[0] = new ResearchView({
