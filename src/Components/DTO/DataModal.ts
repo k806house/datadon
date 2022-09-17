@@ -4,7 +4,7 @@ export default class DataModal {
     file: object;
     cntParticipant: number;
 
-    constructor(data = null) {
+    constructor(data) {
         this.title = data?.title;
         this.file = data?.file;
         this.cntParticipant = data?.cntParticipant;

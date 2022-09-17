@@ -2,11 +2,9 @@ import React from "react";
 import { useState } from "react";
 
 import "./FindData.css";
-import FetchTags from "../DTO/Tag.ts";
 import JsonData from '../../data/tags.json';
 
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -137,5 +135,3 @@ export function FindData() {
     </>
   );
 }
-
-//const explores = FetchTags();
