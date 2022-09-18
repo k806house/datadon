@@ -9,14 +9,16 @@
     transform: scale(1.5);
 }
 
-h1 {
-    margin: auto;
+#user1{
     color: #27528d;
     font-size: 50px;
 }
 
-h2 {
-    margin: auto;
+#user2 {
     color: #27528d;
     font-size: 35px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #27528d;
 }

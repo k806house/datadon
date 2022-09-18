@@ -1,10 +1,9 @@
 //@ts-check
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import "./FindData.css";
-import Tag from "../DTO/Tag";
-import JsonData from "../../data/tags.json";
 
 import {
   Stack,
@@ -17,28 +16,34 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
-import PeopleIcon from "@mui/icons-material/People";
 
 import { NewResearch } from "./NewResearch";
-import ResearchView from "../DTO/ResearchView";
 import FindDataItem from "./FindDataItem";
-
 
 export function FindData() {
   const [openNewResearch, setOpenNewResearch] = useState(false);
   const handleOpenNewResearch = () => setOpenNewResearch(true);
   const handleCloseNewResearch = () => setOpenNewResearch(false);
 
-  const tags: Tag[] = JsonData;
+  const [data, setData] = useState([]);
 
-  var data = [];
-  data[0] = new ResearchView({
-    id: 1,
-    title: "test",
-    file: "test",
-    cntParticipant: 400,
-    cntParticipantFound: 40 
-  });
+  useEffect(() => {
+    async function fetchUsers() {
+      axios
+        .post(
+          "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/study/get",
+          {}, {
+            headers: {
+              'Authorization': `${JSON.parse(localStorage.getItem('token'))}` 
+            }
+          }
+        )
+        .then((response) => {setData(response.data.Studies);}
+    );
+    }
+
+    fetchUsers();
+  }, []);
 
   return (
     <>
@@ -75,7 +80,9 @@ export function FindData() {
         </Grid>
         <Grid item xs={12}>
           <Stack direction="column" spacing={1}>
-            <FindDataItem data={data[0]}></FindDataItem>
+            {data.map((research) => (
+                <FindDataItem data={research}></FindDataItem>
+            ))}
           </Stack>
         </Grid>
       </Grid>
