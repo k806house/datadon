@@ -36,6 +36,9 @@ export function ShareData() {
 
   const [selectedFile, setSelectedFile] = useState();
 	const [isSelected, setIsSelected] = useState(false);
+  const [files, filesSet] = useState([{name: "", tmp_name: ""}]);
+  const [res, resSet] = useState("");
+
 
   const {
       register,
@@ -46,14 +49,29 @@ export function ShareData() {
 
   const onSubmit = (data) => {
     console.log(JSON.stringify(data, null, 4));
+    console.log("res", files);
+
+    axios
+      .post(
+        "https:\//01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/create",
+        {
+          name: data.name,
+          files: files
+        },
+        {
+          headers: {
+             Authorization: token,
+             'Content-Type': 'application/json'
+          }
+        }
+      );
   }
 
-  console.log(token);
    useEffect(() => {
     async function fetchData() {
       axios
         .post(
-          "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/get",
+          "https:\//01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/get",
           "",
           {
             headers: {
@@ -68,15 +86,33 @@ export function ShareData() {
     fetchData();
   }, []);
 
+
+   useEffect(() => {
+    async function hD() {
+      uploadFile()
+        .then((response) => resSet(response));
+    }
+
+    hD();
+  }, []);
+
   const handleFileUpload = (e) => {
     if (!e.target.files) {
       return;
     }
 
-    const file = e.target.files[0];
-    const { name } = file;
-    uploadFile();
-    // console.log(s3Data);
+    const filename = e.target.files[0];
+    uploadFile().then((result) => {
+      console.log("finish");
+      console.log(result);
+      setSelectedFile(e.target.files[0]);
+      setIsSelected(true);
+      filesSet([{name: filename.name, tmp_name: result}])
+    });
+    //const response = uploadFile();
+
+    //console.log(response);
+    //console.log(e);
     // const uploadUrl = s3Data['upload_link'];
     // const filenameTmp = s3Data['tmp_file_name'];
     // uploadFile(uploadUrl, filenameTmp);
@@ -88,19 +124,10 @@ export function ShareData() {
     // fileReader.onerror = function() {
     //   console.log(fileReader.error);
     // };
-
-    //setValue("file", e.target.files[0]);
-		setSelectedFile(e.target.files[0]);
-		setIsSelected(true);
+		//setSelectedFile(e.target.files[0]);
+		//setIsSelected(true);
+    //filesSet([{file: filename, tmp_name: response['tmp_file_name']}]);
 	};
-
-  //var data: MyDataView[] = [];
-  // data[0] = new MyDataView({
-  //   id: 1,
-  //   title: "test",
-  //   dateCreated: Date.now(),
-  //   iconId: 400
-  // });
 
   return (
     <div>
