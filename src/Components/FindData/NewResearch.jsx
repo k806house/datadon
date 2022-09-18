@@ -27,7 +27,6 @@ export function NewResearch() {
           "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/tag/get"
         )
         .then((response) => {
-          console.log(response.data.tags);
           tagsSet(response.data.tags)
         });
     }
