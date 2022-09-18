@@ -17,7 +17,6 @@ const style = {
 };
 
 export function NewResearch() {
-  // const tags: Tag[] = JsonData;
 
   const [tags, tagsSet] = useState([{id: 1, name: "Blood"}]);
   useEffect(() => {
@@ -42,6 +41,42 @@ export function NewResearch() {
       setValue,
   } = useForm();
   const onSubmit = (data) => {};
+
+  const [research, setResearch] = useState([]);
+
+//   const addResearchHandler = () => {
+//     if (commentsRef.current && commentsRef.current.value) {
+//       const newResearch = {
+//         id: 1,
+//         user_id: 1,
+//         name: ""
+//         description: ""
+//         tags: [],
+//         created_at: "2022-07-03",
+//     }
+//     fetch("http://localhost:8010/comments", {
+//       method: 'POST',
+//       headers: new Headers({
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json'
+//       }),
+//       body: JSON.stringify(newComment)
+//       })
+//       .then(response => response.json())
+//       .then(data => {
+//            let updatedComments = comments;
+//            updatedComments.push(data)
+//            setComments([...comments], updatedComments);
+      
+//            setLoading(false);
+//            setError(null);
+//       })
+//       .catch(error => {
+//           setLoading(false);
+//           setError('Something went wrong, please try again later.');
+//       });
+//     }
+//  }
 
   return (
     <div>
@@ -91,6 +126,7 @@ export function NewResearch() {
             <Button
               variant="contained"
               type="submit"
+              // onClick={saveResearch}
             >
               Save
             </Button>

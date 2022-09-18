@@ -8,11 +8,8 @@ import { useForm, useController } from "react-hook-form";
 import axios from "axios";
 
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import VaccinesIcon from "@mui/icons-material/Vaccines";
 import SearchIcon from "@mui/icons-material/Search";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import MyDataView from "../DTO/MyDataView";
 import ShareDataItem from "./ShareDataItem";
 import uploadFile from "./S3Upload";
 import { useNavigate } from "react-router-dom";
@@ -68,8 +65,9 @@ export function ShareData() {
             'Content-Type': 'application/json'
           }
         }
-      ).then(() => {
-        navigate('/share-data');
+      ).then(function () {
+        handleClose();
+        window.location.reload();
       }
       );
   }
@@ -116,24 +114,7 @@ export function ShareData() {
       setIsSelected(true);
       filesSet([{ name: filename.name, tmp_name: result }])
     });
-    //const response = uploadFile();
 
-    //console.log(response);
-    //console.log(e);
-    // const uploadUrl = s3Data['upload_link'];
-    // const filenameTmp = s3Data['tmp_file_name'];
-    // uploadFile(uploadUrl, filenameTmp);
-    // const fileReader = new FileReader();
-    // fileReader.readAsText(file);
-    // fileReader.onload = function() {
-    //   console.log(fileReader.result);
-    // };
-    // fileReader.onerror = function() {
-    //   console.log(fileReader.error);
-    // };
-    //setSelectedFile(e.target.files[0]);
-    //setIsSelected(true);
-    //filesSet([{file: filename, tmp_name: response['tmp_file_name']}]);
   };
 
   return (
