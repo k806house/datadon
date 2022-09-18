@@ -87,8 +87,8 @@ export function FindData() {
         </Grid>
       </Grid>
 
-      <Modal open={openNewResearch} onClose={handleCloseNewResearch}>
-        <NewResearch />
+      <Modal open={openNewResearch}>
+        <NewResearch onClose={handleCloseNewResearch}/>
       </Modal>
     </>
   );

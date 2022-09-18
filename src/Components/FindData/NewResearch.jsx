@@ -16,9 +16,12 @@ const style = {
   p: 4,
 };
 
-export function NewResearch() {
+export function NewResearch(props) {
 
   const [tags, tagsSet] = useState([{id: 1, name: "Blood"}]);
+  const [research, setResearch] = useState([]);
+  const token = JSON.parse(localStorage.getItem('token'));
+
   useEffect(() => {
     async function fetchTags() {
       axios
@@ -40,9 +43,32 @@ export function NewResearch() {
       formState: { errors },
       setValue,
   } = useForm();
-  const onSubmit = (data) => {};
 
-  const [research, setResearch] = useState([]);
+  const onSubmit = (data) => {
+    console.log(JSON.stringify(data, null, 4));
+
+    axios
+    .post(
+      "https:\//01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/study/create",
+      {
+        Name: data.name,
+        Description: data.description,
+        Tags: data.tags
+      },
+      {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(function () {
+      console.log(props)
+      props.onClose();
+      window.location.reload();
+    }
+    );
+  };
+
 
 //   const addResearchHandler = () => {
 //     if (commentsRef.current && commentsRef.current.value) {
