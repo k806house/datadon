@@ -1,10 +1,11 @@
 //@ts-check
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
   Paper, InputBase, Modal, TextField, Box 
 } from "@mui/material";
 import { useForm, useController } from "react-hook-form";
+import axios from "axios";
 
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -27,9 +28,11 @@ const style = {
 };
 
 export function ShareData() {
+  const [data, dataSet] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const token = JSON.parse(localStorage.getItem('token'));
 
   const [selectedFile, setSelectedFile] = useState();
 	const [isSelected, setIsSelected] = useState(false);
@@ -44,6 +47,26 @@ export function ShareData() {
   const onSubmit = (data) => {
     console.log(JSON.stringify(data, null, 4));
   }
+
+  console.log(token);
+   useEffect(() => {
+    async function fetchData() {
+      axios
+        .post(
+          "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/get",
+          "",
+          {
+            headers: {
+               Authorization: token,
+               'Content-Type': 'application/json'
+            }
+          }
+        )
+        .then((response) => dataSet(response.data.Exams));
+    }
+
+    fetchData();
+  }, []);
 
   const handleFileUpload = (e) => {
     if (!e.target.files) {
@@ -71,19 +94,19 @@ export function ShareData() {
 		setIsSelected(true);
 	};
 
-  var data: MyDataView[] = [];
-  data[0] = new MyDataView({
-    id: 1,
-    title: "test",
-    dateCreated: Date.now(),
-    iconId: 400
-  });
+  //var data: MyDataView[] = [];
+  // data[0] = new MyDataView({
+  //   id: 1,
+  //   title: "test",
+  //   dateCreated: Date.now(),
+  //   iconId: 400
+  // });
 
   return (
     <div>
       <h1>My data</h1>
 
-      <Grid container spacing={1} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center">
         <Grid item xs={10}>
           <Paper
             component="form"
@@ -111,11 +134,13 @@ export function ShareData() {
           </Button>
         </Grid>
         <Grid item xs={12}>
+        <Stack direction="column" spacing={1}>
           {
             data ? data.map((d, i) => (
             <ShareDataItem data={d} key={i}></ShareDataItem>))
             : "loading"
           }
+          </Stack>
         </Grid>
       </Grid>
 
