@@ -44,15 +44,15 @@ export function SelectUser() {
 
   return (
     <div>
-      <Stack spacing={10} justifyContent="space-around" alignItems="center" sx={{mt:20, mb:10}}>
-        <h1 id="user1">Select your user!</h1>
+      <Stack spacing={10} justifyContent="space-between" alignItems="center">
+        <h1 id="user1" sx={{pt:3}}>Select your user!</h1>
         <Stack
           component="span"
           justifyContent="center"
           alignItems="center"
           direction="row"
           spacing={4}
-          sx={{}}
+          sx={{pt:2}}
         >
           {users.map((d, i) => (
             <div key={d.id} className="">
