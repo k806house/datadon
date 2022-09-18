@@ -23,14 +23,14 @@ export default function FindDataItem(props) {
           justifyContent="space-between"
         >
           <Container>
-            <h3 onClick={handleOpenResearchInfo} sx={{ p: 5 }}>test</h3>
+            <h3 onClick={handleOpenResearchInfo} sx={{ p: 5 }}>{research.title}</h3>
           </Container>
           <Stack
             direction="row"
             alignItems="center"
             justifyContent="space-around"
           >
-            <h4>500/1000</h4>
+            <h4>{research.cntParticipantFound}/{research.cntParticipant}</h4>
             <PeopleIcon sx={{ m: 2 }} />
             <IconButton color="primary" size="large" sx={{ mx: 3, my: 2 }}>
               <DownloadIcon />
