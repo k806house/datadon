@@ -94,14 +94,6 @@ export function ShareData() {
 		setIsSelected(true);
 	};
 
-  //var data: MyDataView[] = [];
-  // data[0] = new MyDataView({
-  //   id: 1,
-  //   title: "test",
-  //   dateCreated: Date.now(),
-  //   iconId: 400
-  // });
-
   return (
     <div>
       <h1>My data</h1>
