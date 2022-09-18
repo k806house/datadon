@@ -18,7 +18,6 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { NewResearch } from "./NewResearch";
 import FindDataItem from "./FindDataItem";
-import axios from "axios";
 
 export function FindData() {
   const [openNewResearch, setOpenNewResearch] = useState(false);
