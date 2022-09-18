@@ -65,11 +65,6 @@ export function SelectUser() {
               >
                 <img src={d.photo_url} className="user-image" />
               </Button>
-              {/* <Typography
-                align="center"
-              >
-                {d.first_name}
-              </Typography> */}
             </div>
           ))}
         </Stack>
