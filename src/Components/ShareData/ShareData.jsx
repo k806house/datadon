@@ -1,8 +1,8 @@
 //@ts-check
 import React, { useState, useEffect } from "react";
-import { 
+import {
   Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
-  Paper, InputBase, Modal, TextField, Box 
+  Paper, InputBase, Modal, TextField, Box
 } from "@mui/material";
 import { useForm, useController } from "react-hook-form";
 import axios from "axios";
@@ -15,6 +15,7 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import MyDataView from "../DTO/MyDataView";
 import ShareDataItem from "./ShareDataItem";
 import uploadFile from "./S3Upload";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -35,30 +36,54 @@ export function ShareData() {
   const token = JSON.parse(localStorage.getItem('token'));
 
   const [selectedFile, setSelectedFile] = useState();
-	const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
+  const [files, filesSet] = useState([{ name: "", tmp_name: "" }]);
+  const [res, resSet] = useState("");
+
 
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      setValue,
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
   } = useForm();
+
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(JSON.stringify(data, null, 4));
+    console.log("res", files);
+
+
+    axios
+      .post(
+        "https:\//01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/create",
+        {
+          name: data.name,
+          files: files
+        },
+        {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then(() => {
+        navigate('/share-data');
+      }
+      );
   }
 
-  console.log(token);
-   useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       axios
         .post(
-          "https://01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/get",
+          "https:\//01rtunofc9.execute-api.eu-west-1.amazonaws.com/serverless_lambda_stage/exam/get",
           "",
           {
             headers: {
-               Authorization: token,
-               'Content-Type': 'application/json'
+              Authorization: token,
+              'Content-Type': 'application/json'
             }
           }
         )
@@ -68,15 +93,33 @@ export function ShareData() {
     fetchData();
   }, []);
 
+
+  useEffect(() => {
+    async function hD() {
+      uploadFile()
+        .then((response) => resSet(response));
+    }
+
+    hD();
+  }, []);
+
   const handleFileUpload = (e) => {
     if (!e.target.files) {
       return;
     }
 
-    const file = e.target.files[0];
-    const { name } = file;
-    uploadFile();
-    // console.log(s3Data);
+    const filename = e.target.files[0];
+    uploadFile().then((result) => {
+      console.log("finish");
+      console.log(result);
+      setSelectedFile(e.target.files[0]);
+      setIsSelected(true);
+      filesSet([{ name: filename.name, tmp_name: result }])
+    });
+    //const response = uploadFile();
+
+    //console.log(response);
+    //console.log(e);
     // const uploadUrl = s3Data['upload_link'];
     // const filenameTmp = s3Data['tmp_file_name'];
     // uploadFile(uploadUrl, filenameTmp);
@@ -88,19 +131,10 @@ export function ShareData() {
     // fileReader.onerror = function() {
     //   console.log(fileReader.error);
     // };
-
-    //setValue("file", e.target.files[0]);
-		setSelectedFile(e.target.files[0]);
-		setIsSelected(true);
-	};
-
-  //var data: MyDataView[] = [];
-  // data[0] = new MyDataView({
-  //   id: 1,
-  //   title: "test",
-  //   dateCreated: Date.now(),
-  //   iconId: 400
-  // });
+    //setSelectedFile(e.target.files[0]);
+    //setIsSelected(true);
+    //filesSet([{file: filename, tmp_name: response['tmp_file_name']}]);
+  };
 
   return (
     <div>
@@ -122,7 +156,7 @@ export function ShareData() {
             <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search data..." />
           </Paper>
         </Grid>
-        <Grid item xs={2} sx={{ display: "flex"}}>
+        <Grid item xs={2} sx={{ display: "flex" }}>
           <Button
             variant="contained"
             startIcon={<AddIcon />}
@@ -134,12 +168,12 @@ export function ShareData() {
           </Button>
         </Grid>
         <Grid item xs={12}>
-        <Stack direction="column" spacing={1}>
-          {
-            data ? data.map((d, i) => (
-            <ShareDataItem data={d} key={i}></ShareDataItem>))
-            : "loading"
-          }
+          <Stack direction="column" spacing={1}>
+            {
+              data ? data.map((d, i) => (
+                <ShareDataItem data={d} key={i}></ShareDataItem>))
+                : "loading"
+            }
           </Stack>
         </Grid>
       </Grid>
@@ -174,7 +208,7 @@ export function ShareData() {
               ) : (
                 <p>No file selected</p>
               )}
-              
+
               <Button
                 variant="contained"
                 type="submit"

@@ -10,7 +10,7 @@ import MyDataView from "../DTO/MyDataView";
 
 export default function ShareDataItem(props) {
   var myData = new MyDataView(props.data);
-  console.log(myData);
+  //console.log(myData);
   return (
     <Paper>
       <Stack direction="row" alignItems="center" justifyContent="center">
