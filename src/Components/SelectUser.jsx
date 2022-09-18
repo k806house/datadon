@@ -1,9 +1,9 @@
+import "./SelectUser.css";
 import { React, useState, useEffect } from "react";
 import { Stack, Button, Typography } from "@mui/material";
 
 import axios from "axios";
 
-import "./SelectUser.css";
 
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +45,7 @@ export function SelectUser() {
   return (
     <div>
       <Stack spacing={10} justifyContent="space-around" alignItems="center" sx={{mt:20, mb:10}}>
-        <h1>Select your user!</h1>
+        <h1 id="user1">Select your user!</h1>
         <Stack
           component="span"
           justifyContent="center"
@@ -65,15 +65,10 @@ export function SelectUser() {
               >
                 <img src={d.photo_url} className="user-image" />
               </Button>
-              {/* <Typography
-                align="center"
-              >
-                {d.first_name}
-              </Typography> */}
             </div>
           ))}
         </Stack>
-        <h2>{name}</h2>
+        <h2 id="user2">{name}</h2>
       </Stack>
     </div>
   );
