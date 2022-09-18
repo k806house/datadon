@@ -1,8 +1,8 @@
 //@ts-check
 import React, { useState, useEffect } from "react";
-import { 
+import {
   Stack, IconButton, Grid, Button, ListItemText, ListItemAvatar, Avatar,
-  Paper, InputBase, Modal, TextField, Box 
+  Paper, InputBase, Modal, TextField, Box
 } from "@mui/material";
 import { useForm, useController } from "react-hook-form";
 import axios from "axios";
@@ -15,6 +15,7 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import MyDataView from "../DTO/MyDataView";
 import ShareDataItem from "./ShareDataItem";
 import uploadFile from "./S3Upload";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -35,21 +36,24 @@ export function ShareData() {
   const token = JSON.parse(localStorage.getItem('token'));
 
   const [selectedFile, setSelectedFile] = useState();
-	const [isSelected, setIsSelected] = useState(false);
-  const [files, filesSet] = useState([{name: "", tmp_name: ""}]);
+  const [isSelected, setIsSelected] = useState(false);
+  const [files, filesSet] = useState([{ name: "", tmp_name: "" }]);
   const [res, resSet] = useState("");
 
 
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      setValue,
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
   } = useForm();
+
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(JSON.stringify(data, null, 4));
     console.log("res", files);
+
 
     axios
       .post(
@@ -60,14 +64,17 @@ export function ShareData() {
         },
         {
           headers: {
-             Authorization: token,
-             'Content-Type': 'application/json'
+            Authorization: token,
+            'Content-Type': 'application/json'
           }
         }
+      ).then(() => {
+        navigate('/share-data');
+      }
       );
   }
 
-   useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
       axios
         .post(
@@ -75,8 +82,8 @@ export function ShareData() {
           "",
           {
             headers: {
-               Authorization: token,
-               'Content-Type': 'application/json'
+              Authorization: token,
+              'Content-Type': 'application/json'
             }
           }
         )
@@ -87,7 +94,7 @@ export function ShareData() {
   }, []);
 
 
-   useEffect(() => {
+  useEffect(() => {
     async function hD() {
       uploadFile()
         .then((response) => resSet(response));
@@ -107,7 +114,7 @@ export function ShareData() {
       console.log(result);
       setSelectedFile(e.target.files[0]);
       setIsSelected(true);
-      filesSet([{name: filename.name, tmp_name: result}])
+      filesSet([{ name: filename.name, tmp_name: result }])
     });
     //const response = uploadFile();
 
@@ -124,10 +131,10 @@ export function ShareData() {
     // fileReader.onerror = function() {
     //   console.log(fileReader.error);
     // };
-		//setSelectedFile(e.target.files[0]);
-		//setIsSelected(true);
+    //setSelectedFile(e.target.files[0]);
+    //setIsSelected(true);
     //filesSet([{file: filename, tmp_name: response['tmp_file_name']}]);
-	};
+  };
 
   return (
     <div>
@@ -149,7 +156,7 @@ export function ShareData() {
             <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search data..." />
           </Paper>
         </Grid>
-        <Grid item xs={2} sx={{ display: "flex"}}>
+        <Grid item xs={2} sx={{ display: "flex" }}>
           <Button
             variant="contained"
             startIcon={<AddIcon />}
@@ -161,12 +168,12 @@ export function ShareData() {
           </Button>
         </Grid>
         <Grid item xs={12}>
-        <Stack direction="column" spacing={1}>
-          {
-            data ? data.map((d, i) => (
-            <ShareDataItem data={d} key={i}></ShareDataItem>))
-            : "loading"
-          }
+          <Stack direction="column" spacing={1}>
+            {
+              data ? data.map((d, i) => (
+                <ShareDataItem data={d} key={i}></ShareDataItem>))
+                : "loading"
+            }
           </Stack>
         </Grid>
       </Grid>
@@ -201,7 +208,7 @@ export function ShareData() {
               ) : (
                 <p>No file selected</p>
               )}
-              
+
               <Button
                 variant="contained"
                 type="submit"
